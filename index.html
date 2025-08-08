@@ -1,0 +1,127 @@
+<!DOCTYPE html> <!-- yo telling the browser "this is an html5 doc" -->
+<html lang="en"> <!-- saying our site is in english -->
+<head> <!-- head tag = all the behind-the-scenes setup stuff -->
+    <meta charset="UTF-8"> <!-- making sure special characters work fine -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsive vibes for mobile -->
+    <title>Pomodoro Productivity App</title> <!-- title showing up on browser tab -->
+    
+    <!-- bringing in chart.js so we can do fancy stats graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- linking the css file to make things look less boring -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> <!-- all the visible stuff goes in here -->
+    
+    <!-- top bar with logo and page links -->
+    <div class="header">
+        <div class="logo">Pomo-tomato</div> <!-- site name (could change if tomato slander continues) -->
+        <div class="headertwo">
+            <span class="active" onclick="showSection('home')">Home</span> <!-- link to home section -->
+            <span onclick="showSection('stats')">Stats</span> <!-- link to stats section -->
+            <span onclick="showSection('planner')">Planner</span> <!-- link to planner section -->
+        </div>
+    </div>
+    
+    <div class="body"> <!-- main content zone -->
+        
+        <!-- lil label telling you if it's work/break mode -->
+        <div class="mode-indicator" id="modeIndicator">Work Time</div>
+        
+        <!-- okay tomato is gone, here’s your own pic instead -->
+        <div class="tomato-container">
+            <img src="4de70b748fe57400a7fad7efe4e58ff9-removebg-preview.png" alt="me being productive" class="my-pic"> <!-- replace src with your pic file or link -->
+        </div>
+        
+        <!-- the countdown clock -->
+        <div id="timer" class="timer">25:00</div>
+        
+        <!-- timer control buttons -->
+        <div class="button">
+            <button id="start" onclick="startTimer()">Start</button> <!-- starts the countdown -->
+            <button id="pause" onclick="pauseTimer()">Pause</button> <!-- freezes it mid-way -->
+            <button id="stop" onclick="resetTimer()">Stop</button> <!-- resets back to 25:00 -->
+        </div>
+        
+        <!-- quick break options -->
+        <div class="break-options">
+            <div class="break-btn" onclick="startBreak(5)">Short Break (5min)</div> <!-- starts a 5 min break -->
+            <div class="break-btn" onclick="startBreak(15)">Long Break (15min)</div> <!-- starts a 15 min break -->
+        </div>
+        
+        <!-- HOME PAGE -->
+        <div class="page-section active" id="homePage"> <!-- active = this one shows first -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="todayPomodoros">0</div> <!-- how many pomos today -->
+                    <div class="stat-label">Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPomodoros">0</div> <!-- all pomos ever -->
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="streak">0</div> <!-- streak days -->
+                    <div class="stat-label">Streak</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- STATS PAGE -->
+        <div class="page-section" id="statsPage">
+            <div class="page-title">📊 Progress Statistics</div> <!-- cute title with emoji -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="statsTodayPomodoros">0</div> <!-- today's count -->
+                    <div class="stat-label">Today's Sessions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statsTotalPomodoros">0</div> <!-- lifetime count -->
+                    <div class="stat-label">Total Sessions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statsStreak">0</div> <!-- streak days here too -->
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgDaily">0</div> <!-- average daily count -->
+                    <div class="stat-label">Daily Average</div>
+                </div>
+            </div>
+            
+            <!-- graph section -->
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas> <!-- where chart.js draws magic -->
+            </div>
+        </div>
+        
+        <!-- PLANNER PAGE -->
+        <div class="page-section" id="plannerPage">
+            <div class="page-title">📝 Task Planner</div> <!-- planning zone -->
+            <div class="todo-container">
+                <div class="todo-input-section">
+                    <input type="text" class="todo-input" id="todoInput" placeholder="Add a new task..." maxlength="100"> <!-- type tasks here -->
+                    <button class="add-btn" onclick="addTodo()">Add Task</button> <!-- adds to list -->
+                </div>
+                
+                <!-- list of tasks -->
+                <ul class="todo-list" id="todoList">
+                    <li class="empty-state">No tasks yet. Add one above to get started! 🚀</li> <!-- empty msg -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- footer -->
+    <div class="footer">
+        <p>pomodoro@gmail.com</p> <!-- email -->
+        <a href="https://www.linkedin.com/in/aadhya-guragain-972592372/">Linkedin</a> <!-- linkedin link -->
+    </div>
+    
+    <!-- lil popup alert when timer ends -->
+    <div class="alert" id="alert">Timer Complete! 🍅</div>
+    
+    <!-- js file link -->
+    <script src="script.js"></script>
+</body>
+</html>
